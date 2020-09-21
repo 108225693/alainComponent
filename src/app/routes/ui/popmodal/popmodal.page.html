@@ -1,0 +1,76 @@
+<div nz-row class="content-white">
+    <!--
+        <button nz-button (click)="info()">Info</button>
+    <button nz-button (click)="success()">Success</button>
+    <button nz-button (click)="error()">Error</button>
+    <button nz-button (click)="warning()">Warning</button> -->
+
+    <div nz-row [nzGutter]="16">
+        <div nz-col [nzSpan]="8">
+            <nz-card nzHoverable [nzCover]="coverTemplate1" (click)="showModal()">
+                <nz-card-meta nzTitle="异步关闭对话框" nzDescription="点击确定按钮后，过几秒自动关闭"></nz-card-meta>
+            </nz-card>
+            <ng-template #coverTemplate1>
+                <img alt="example" src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png" />
+            </ng-template>
+        </div>
+        <div nz-col [nzSpan]="8">
+            <nz-card nzHoverable [nzCover]="coverTemplate2" (click)="showConfirm()">
+                <nz-card-meta nzTitle="确认对话框" nzDescription="对话框确认按钮为系统默认色"></nz-card-meta>
+            </nz-card>
+            <ng-template #coverTemplate2>
+                <img alt="example" src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png" />
+            </ng-template>
+        </div>
+        <div nz-col [nzSpan]="8">
+            <nz-card nzHoverable [nzCover]="coverTemplate3" (click)="showDeleteConfirm()">
+                <nz-card-meta nzTitle="删除对话框" nzDescription="对话框确认按钮为红色"></nz-card-meta>
+            </nz-card>
+            <ng-template #coverTemplate3>
+                <img alt="example" src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png" />
+            </ng-template>
+        </div>
+        <div nz-col [nzSpan]="6">
+            <nz-card nzHoverable [nzCover]="coverTemplate4" (click)="info()">
+                <nz-card-meta nzTitle="Info" nzDescription="对话框带有提示图标"></nz-card-meta>
+            </nz-card>
+            <ng-template #coverTemplate4>
+                <img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />
+            </ng-template>
+        </div>
+
+        <div nz-col [nzSpan]="6">
+            <nz-card nzHoverable [nzCover]="coverTemplate5" (click)="success()">
+                <nz-card-meta nzTitle="Success" nzDescription="对话框带有成功图标，只能查看"></nz-card-meta>
+            </nz-card>
+            <ng-template #coverTemplate5>
+                <img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />
+            </ng-template>
+        </div>
+
+        <div nz-col [nzSpan]="6">
+            <nz-card nzHoverable [nzCover]="coverTemplate6" (click)="error()">
+                <nz-card-meta nzTitle="Error" nzDescription="对话框带有错误图标，只能查看"></nz-card-meta>
+            </nz-card>
+            <ng-template #coverTemplate6>
+                <img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />
+            </ng-template>
+        </div>
+
+        <div nz-col [nzSpan]="6">
+            <nz-card nzHoverable [nzCover]="coverTemplate6" (click)="warning()">
+                <nz-card-meta nzTitle="Warning" nzDescription="对话框带有警告图标，只能查看"></nz-card-meta>
+            </nz-card>
+            <ng-template #coverTemplate6>
+                <img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />
+            </ng-template>
+        </div>
+    </div>
+</div>
+
+<nz-modal [(nzVisible)]="isVisible" nzTitle="对话框" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()"
+    [nzOkLoading]="isOkLoading">
+    <p>故事情节是指作品所描写的事件发展，演变的全过程，故事情节的一般结构：（序幕）－开端－发展－高潮－结局－（尾声）。</p>
+    <p>故事情节来源于生活，它是现实生活的提炼，它比现实生活更集中，更有代表性。现实生活中的事件和矛盾是有始有终，有起有伏，并有一定发展过程的，因而小说情节的展开，也是有段落，有过程的。这个过程一般分为开端、发展、高潮、结局四个部分。有时还有序幕和尾声。在作品中，情节的安排决定于作者的艺术构思，并不一定按照现实生活中的事件发生、发展的自然顺序，有时可以省略某一部分，有时也可颠倒或交错。
+    </p>
+</nz-modal>

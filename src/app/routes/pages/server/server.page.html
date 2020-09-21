@@ -1,0 +1,95 @@
+<div class="content-white">
+
+    <div nz-row [nzGutter]="8">
+        <div nz-col [nzSpan]="8">
+            <nz-card nzTitle="CPU" nzHoverable="true">
+                核心数
+                <nz-progress [nzPercent]="4" nzStatus="active" [nzFormat]="number"></nz-progress>
+                用户使用率
+                <nz-progress [nzPercent]="10" nzStatus="active" [nzStrokeColor]="nzStrokeColorPurple"></nz-progress>
+                系统使用率
+                <nz-progress [nzPercent]="4" nzStatus="active" [nzStrokeColor]="nzStrokeColorYellow"></nz-progress>
+                当前空闲率
+                <nz-progress [nzPercent]="86" [nzStrokeColor]="nzStrokeColorGreen"></nz-progress>
+            </nz-card>
+        </div>
+        <div nz-col [nzSpan]="8">
+            <nz-card nzTitle="内存" nzHoverable=" true">
+                总内存
+                <nz-progress [nzPercent]="16" nzStatus="active" [nzFormat]="size"></nz-progress>
+                已用内存
+                <nz-progress [nzPercent]="4" nzStatus="active" [nzFormat]="size" [nzStrokeColor]="nzStrokeColorPurple">
+                </nz-progress>
+                剩余内存
+                <nz-progress [nzPercent]="12" nzStatus="active" [nzFormat]="size" [nzStrokeColor]="nzStrokeColorYellow">
+                </nz-progress>
+                使用率
+                <nz-progress [nzPercent]="25" [nzStrokeColor]="nzStrokeColorGreen"></nz-progress>
+            </nz-card>
+        </div>
+        <div nz-col [nzSpan]="8">
+            <nz-card nzTitle="磁盘状态" nzHoverable="true">
+                总大小
+                <nz-progress [nzPercent]="1000" nzStatus="active" [nzFormat]="size"></nz-progress>
+                可用大小
+                <nz-progress [nzPercent]="30" nzStatus="active" [nzFormat]="size" [nzStrokeColor]="nzStrokeColorPurple">
+                </nz-progress>
+                已用大小
+                <nz-progress [nzPercent]="970" nzStatus="active" [nzFormat]="size"
+                    [nzStrokeColor]="nzStrokeColorYellow"></nz-progress>
+                已用百分比
+                <nz-progress [nzPercent]="97" [nzStrokeColor]="nzStrokeColorGreen"></nz-progress>
+            </nz-card>
+        </div>
+    </div>
+    <nz-card nzTitle="服务器信息" nzHoverable="true">
+        <nz-table #serverTable nzShowPagination="false" nzBordered [nzData]="serverData">
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>服务器名称</th>
+                    <th>服务器IP</th>
+                    <th>操作系统</th>
+                    <th>系统架构</th>
+                    <th>服务地址</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of serverTable.data;index as i">
+                    <td>{{ +i+1 }}</td>
+                    <td>{{ data.name }}</td>
+                    <td>{{ data.ip }}</td>
+                    <td>{{ data.os }}</td>
+                    <td>{{ data.frame }}</td>
+                    <td>{{ data.address }}</td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </nz-card>
+    <nz-card nzTitle="Java虚拟机信息" nzHoverable="true">
+        <nz-table #javaTable nzShowPagination="false" nzBordered [nzData]="javaData">
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>Java虚拟机信息</th>
+                    <th>启动时间</th>
+                    <th>安装路径</th>
+                    <th>项目路径</th>
+                    <th>Java版本</th>
+                    <th>运行时长</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of javaTable.data;index as i">
+                    <td>{{ +i+1 }}</td>
+                    <td>{{ data.info }}</td>
+                    <td>{{ data.time }}</td>
+                    <td>{{ data.install }}</td>
+                    <td>{{ data.project }}</td>
+                    <td>{{ data.version }}</td>
+                    <td>{{ data.duration }}</td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </nz-card>
+</div>

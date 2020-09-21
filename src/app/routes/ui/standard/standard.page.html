@@ -1,0 +1,31 @@
+<div style="width:200px;position:fixed;left:230px;top:130px;z-index:9">
+    <nz-anchor [nzAffix]="false" nzShowInkInFixed="true">
+        <ng-container *ngFor="let list of menuAnchor;">
+            <nz-link [nzHref]="'#'+list.id" [nzTitle]="list.name"></nz-link>
+        </ng-container>
+    </nz-anchor>
+</div>
+
+<div nz-row style="background: #fff;">
+    <div nz-col nzSpan="4"></div>
+    <div nz-col nzSpan="16">
+        <ng-container *ngFor="let list of menuAnchor">
+            <div *ngIf="list.id == 'title';else another" [id]="list.id" style="margin-top:20px">
+                <h1 style="text-align:center">{{list.name}}</h1>
+                {{list.content}}
+            </div>
+            <ng-template #another>
+                <div [id]="list.id" style="margin-top:20px">
+                    <h2>{{list.name}}</h2>
+                    <div *ngIf="list.children.length == 0;else child">
+                        {{list.content}}
+                    </div>
+                    <ng-template #child>
+                        <div *ngFor="let item of list.children;index as i">{{+i+1}}. {{item.content}}</div>
+                    </ng-template>
+                </div>
+            </ng-template>
+        </ng-container>
+    </div>
+    <div nz-col nzSpan="4"></div>
+</div>

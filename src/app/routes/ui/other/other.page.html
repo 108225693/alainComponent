@@ -1,0 +1,182 @@
+<div nz-row class="content-white">
+    <div nz-row>
+        <div nz-col nzSpan="24">
+            <div style="margin:0 0 20px 10px">
+                <nz-breadcrumb>
+                    <nz-breadcrumb-item><i nz-icon nzType="home"></i></nz-breadcrumb-item>
+                    <nz-breadcrumb-item>UI规范</nz-breadcrumb-item>
+                    <nz-breadcrumb-item>其他</nz-breadcrumb-item>
+                </nz-breadcrumb>
+            </div>
+        </div>
+        <div nz-col nzSpan="24">
+            <div style="margin:0 0 20px 10px">
+                <nz-steps [nzCurrent]="1">
+                    <nz-step nzTitle="添加用户" nzDescription="给新用户建立基本信息"></nz-step>
+                    <nz-step nzTitle="分配角色" nzSubtitle="角色需对应用户" nzDescription="给注册用户分配角色">
+                    </nz-step>
+                    <nz-step nzTitle="配置权限" nzDescription="配置菜单或按钮权限"></nz-step>
+                    <nz-step nzTitle="完成" nzDescription="切换用户生效"></nz-step>
+                </nz-steps>
+            </div>
+        </div>
+        <div nz-col nzSpan="4">
+            <ul nz-menu nzMode="inline">
+                <li nz-submenu nzTitle="一级菜单1" nzIcon="mail" nzOpen>
+                    <ul>
+                        <li nz-menu-item nzSelected>二级菜单1</li>
+                        <li nz-menu-item>二级菜单2</li>
+                        <li nz-menu-item>二级菜单3</li>
+                        <li nz-menu-item>二级菜单4</li>
+                        <li nz-menu-item>二级菜单5</li>
+                    </ul>
+                </li>
+                <li nz-submenu nzTitle="一级菜单2" nzIcon="appstore">
+                    <ul>
+                        <li nz-menu-item>二级菜单3</li>
+                        <li nz-menu-item>二级菜单4</li>
+                        <li nz-submenu nzTitle="二级菜单5">
+                            <ul>
+                                <li nz-menu-item>三级菜单1</li>
+                                <li nz-menu-item>三级菜单2</li>
+                                <li nz-submenu nzTitle="三级菜单3">
+                                    <ul>
+                                        <li nz-menu-item>四级菜单1</li>
+                                        <li nz-menu-item>四级菜单2</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li nz-submenu nzTitle="一级菜单3" nzIcon="setting">
+                    <ul>
+                        <li nz-menu-item>二级菜单6</li>
+                        <li nz-menu-item>二级菜单7</li>
+                        <li nz-menu-item>二级菜单8</li>
+                    </ul>
+                </li>
+                <li nz-submenu nzTitle="一级菜单4" nzIcon="setting"></li>
+                <li nz-submenu nzTitle="一级菜单5" nzIcon="setting"></li>
+                <li nz-submenu nzTitle="一级菜单6" nzIcon="setting"></li>
+            </ul>
+        </div>
+        <div nz-col nzSpan="10">
+            <div>
+                <nz-empty></nz-empty>
+            </div>
+            <div style="padding-top:20px">
+                <nz-empty
+                    [nzNotFoundImage]="'https://gw.alipayobjects.com/mdn/miniapp_social/afts/img/A*pevERLJC9v0AAAAAAAAAAABjAQAAAQ/original'"
+                    [nzNotFoundContent]="contentTpl" [nzNotFoundFooter]="footerTpl">
+                    <ng-template #contentTpl>
+                        <span>没有数据</span>
+                    </ng-template>
+                    <ng-template #footerTpl>
+                        <button nz-button nzType="primary">添加新数据</button>
+                    </ng-template>
+                </nz-empty>
+            </div>
+            <div style="padding-top:20px">
+                <nz-table>
+                    <thead>
+                        <tr>
+                            <th>名称</th>
+                            <th>年龄</th>
+                            <th>地址</th>
+                            <th>性别</th>
+                        </tr>
+                    </thead>
+                </nz-table>
+            </div>
+        </div>
+        <div nz-col nzSpan="10">
+            <nz-calendar [(ngModel)]="date" [(nzMode)]="mode" (nzPanelChange)="panelChange($event)"></nz-calendar>
+        </div>
+    </div>
+    <div nz-row style="margin-top:20px">
+        <div nz-col nzSpan="4">
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. quae sunt a te dicta? Refert
+                tamen, quo modo.
+            </p>
+            <nz-divider nzText="With Text"></nz-divider>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. quae sunt a te dicta? Refert
+                tamen, quo modo.
+            </p>
+        </div>
+        <div nz-col nzSpan="10">
+            <nz-timeline nzMode="alternate">
+                <nz-timeline-item>Create a site 2015-09-01</nz-timeline-item>
+                <nz-timeline-item nzColor="green">Solve initial 2015-09-01</nz-timeline-item>
+                <nz-timeline-item [nzDot]="dotTemplate">Sed ut dicta sunt explicabo.
+                </nz-timeline-item>
+                <nz-timeline-item nzColor="red">Network solved 2015-09-01</nz-timeline-item>
+                <nz-timeline-item>Create a services 2015-09-01</nz-timeline-item>
+                <nz-timeline-item [nzDot]="dotTemplate">Technical testing 2015-09-01</nz-timeline-item>
+            </nz-timeline>
+            <ng-template #dotTemplate>
+                <i nz-icon nzType="clock-circle-o" style="font-size: 16px;"></i>
+            </ng-template>
+        </div>
+        <div nz-col nzSpan="10">
+            <nz-carousel [nzEffect]="effect">
+                <div nz-carousel-content *ngFor="let index of array">
+                    <h3>{{ index }}</h3>
+                </div>
+            </nz-carousel>
+        </div>
+    </div>
+    <div nz-row style="margin-top:20px">
+        <div nz-col nzSpan="4">
+            <nz-upload nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76" [nzFileList]="fileList">
+                <button nz-button><i nz-icon nzType="upload"></i>Upload</button>
+            </nz-upload>
+        </div>
+        <div nz-col nzSpan="10">
+            <nz-transfer [nzDataSource]="list" [nzDisabled]="disabled" nzShowSearch [nzFilterOption]="filterOption"
+                (nzSearchChange)="search($event)" (nzSelectChange)="select($event)" (nzChange)="change($event)">
+            </nz-transfer>
+        </div>
+        <div nz-col nzSpan="10">
+            <nz-row>
+                <nz-col nzSpan="12">
+                    <nz-slider [nzMin]="1" [nzMax]="20" [(ngModel)]="value1"></nz-slider>
+                </nz-col>
+                <div nz-col nzSpan="4">
+                    <nz-input-number [nzMin]="1" [nzMax]="20" [ngStyle]="{ marginLeft: '16px' }" [(ngModel)]="value1">
+                    </nz-input-number>
+                </div>
+            </nz-row>
+            <br />
+            <nz-row>
+                <nz-col nzSpan="12">
+                    <nz-slider [nzMin]="0" [nzMax]="1" [nzStep]="0.01" [(ngModel)]="value2"></nz-slider>
+                </nz-col>
+                <nz-col nzSpan="4">
+                    <nz-input-number [nzMin]="0" [nzMax]="1" [ngStyle]="{ marginLeft: '16px' }" [nzStep]="0.01"
+                        [(ngModel)]="value2"></nz-input-number>
+                </nz-col>
+            </nz-row>
+            <br />
+            <nz-row>
+                <div class="icon-wrapper">
+                    <div style="float: left;margin-top:8px;">
+                        <i nz-icon nzType="frown" [class.icon-highlight]="preHighLight"></i>
+                    </div>
+                    <div style="float: left;margin:0 10px;width:80%;">
+                        <nz-slider [nzMin]="0" [nzMax]="20" [(ngModel)]="sliderValue"></nz-slider>
+                    </div>
+                    <div style="float: left;margin-top:8px;">
+                        <i nz-icon nzType="smile" [class.icon-highlight]="nextHighLight"></i>
+                    </div>
+                </div>
+            </nz-row>
+            <br />
+            <nz-row>
+                <nz-slider [nzMarks]="marks" [ngModel]="37"></nz-slider>
+            </nz-row>
+        </div>
+    </div>
+</div>

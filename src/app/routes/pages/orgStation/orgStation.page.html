@@ -1,0 +1,36 @@
+<div class="content-white p1000">
+    <div style="margin:0 0 10px 10px;">
+        <button nz-button nzType="primary" (click)="add()"><i nz-icon nzType="plus-circle"></i>新增</button>
+    </div>
+    <div nz-col nzSpan="6">
+        <div class="left" [ngStyle]="fullHeight">
+            <nz-tree #nzTreeComponent [nzData]="bmNodes" nzShowLine nzExpandAll="true" (nzClick)="nzClick($event)">
+            </nz-tree>
+        </div>
+    </div>
+    <div nz-col nzSpan="18">
+        <div class="right" [ngStyle]="fullHeight">
+            <div class="table-nzbordered">
+                <nz-table #rowSelectionTable nzBordered nzShowPagination nzShowSizeChanger [nzData]="czData"
+                    (nzCurrentPageDataChange)="currentPageDataChange($event)">
+                    <thead>
+                        <tr>
+                            <th nzAlign="center" nzWidth="50px" nzShowCheckbox [(nzChecked)]="allChecked"
+                                [nzIndeterminate]="indeterminate" (nzCheckedChange)="checkAll($event)"></th>
+                            <th nzAlign="center">车站名</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of rowSelectionTable.data">
+                            <td nzAlign="center" nzShowCheckbox [(nzChecked)]="data.checked"
+                                (nzCheckedChange)="refreshStatus()">
+                            </td>
+                            <td nzAlign="center">{{ data.name }}</td>
+                        </tr>
+                    </tbody>
+                </nz-table>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>

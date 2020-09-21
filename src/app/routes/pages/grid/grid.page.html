@@ -1,0 +1,66 @@
+<div *ngIf="gridEdit" class="gridWrap">
+    宽 <nz-input-number [(ngModel)]="widthValue" [nzMin]="1" [nzMax]="6" [nzStep]="1"></nz-input-number>
+    &nbsp;
+    高 <nz-input-number [(ngModel)]="heightValue" [nzMin]="1" [nzMax]="4" [nzStep]="1"></nz-input-number>
+    &nbsp;
+    <button nz-button nzType="primary" nzGhost (click)="addWidgetWithoutData()"><i nz-icon
+            nzType="plus-circle"></i>添加布局</button>
+    <button nz-button nzType="danger" (click)="removeAllWidgets()" nzGhost><i nz-icon nzType="delete"></i>清空布局</button>
+    <button nz-button nzType="primary" nzGhost disabled><i nz-icon nzType="check-circle"></i>提交布局</button>
+    <!-- <button nz-button nzType="primary" (click)="lock()" nzGhost><i nz-icon nzType="setting"></i>预览/编辑</button>
+    <button nz-button nzType="primary" (click)="test()"><i nz-icon nzType="edit"></i>测试数据</button>
+    <button nz-button nzType="primary" (click)="data()">查看数据源</button> -->
+</div>
+<div class="main-content">
+    <ngx-gridster [options]="gridsterOptions" [draggableOptions]="gridsterDraggableOptions" (reflow)="onReflow($event)"
+        (optionsChange)="optionsChange($event)" #gridster1 class="dashboard">
+
+        <ngx-gridster-item *ngFor="let widget of widgets; let indx = index" #itemComp [options]="itemOptions"
+            [dragAndDrop]="widget.dragAndDrop" [resizable]="widget.resizable" [(x)]="widget.x" [(y)]="widget.y"
+            [(xSm)]="widget.xSm" [(ySm)]="widget.ySm" [(xMd)]="widget.xMd" [(yMd)]="widget.yMd" [(xLg)]="widget.xLg"
+            [(yLg)]="widget.yLg" [(xXl)]="widget.xXl" [(yXl)]="widget.yXl" [(w)]="widget.w" [(h)]="widget.h"
+            [(wSm)]="widget.wSm" [(hSm)]="widget.hSm" [(wMd)]="widget.wMd" [(hMd)]="widget.hMd" [(wLg)]="widget.wLg"
+            [(hLg)]="widget.hLg" [(wXl)]="widget.wXl" [(hXl)]="widget.hXl"
+            (change)="itemChange($event,gridster1,indx,widget.id)">
+
+            <div class="panel-heading">
+                <h5 class="panel-title">
+                    <ng-container *ngIf="!gridEdit">
+                        <div class="title">{{widget.title}}</div>
+                    </ng-container>
+                    <ng-container *ngIf="gridEdit">
+                        <nz-input-group [nzAddOnBefore]="moveButton" [nzAddOnAfter]="delButton">
+                            <input type="text" placeholder="请输入标题内容" style="width:60%;" nz-input
+                                [(ngModel)]="widget.title" />
+                            <nz-select style="width:40%;" nzPlaceHolder="请选择内容" (ngModelChange)="contChange($event,widget.id)"
+                                [(ngModel)]="widget.dataValue">
+                                <nz-option *ngFor="let item of dataSelect" [nzValue]="item" [nzLabel]="item">
+                                </nz-option>
+                            </nz-select>
+                        </nz-input-group>
+                        <ng-template #moveButton>
+                            <span class="moveOpera pointer" nzTooltipTitle="点击此处拖拽" nzTooltipPlacement="topCenter"
+                                nz-tooltip><i nz-icon nzType="drag" nzTheme="outline"></i></span>
+                        </ng-template>
+                        <ng-template #delButton>
+                            <span class="pointer" nzTooltipTitle="删除该盒子里所有内容" nzTooltipPlacement="topCenter" nz-tooltip
+                                (click)="remove($event, indx,gridster1)"><i nz-icon nzType="close"
+                                    nzTheme="outline"></i></span>
+                        </ng-template>
+                    </ng-container>
+                </h5>
+            </div>
+
+            <div class="panel-body">
+                <app-tagechartsline *ngIf="widget.dataValue === '折线图'"></app-tagechartsline>
+                <app-tagechartsbar *ngIf="widget.dataValue === '柱状图'"></app-tagechartsbar>
+                <app-tagechartspie *ngIf="widget.dataValue === '饼图'"></app-tagechartspie>
+                <app-tagform *ngIf="widget.dataValue === '物资信息录入'"></app-tagform>
+                <app-tagdesc *ngIf="widget.dataValue === '集中监测明细'"></app-tagdesc>
+                <app-tagtable *ngIf="widget.dataValue === '应急处置列表'"></app-tagtable>
+            </div>
+
+        </ngx-gridster-item>
+
+    </ngx-gridster>
+</div>

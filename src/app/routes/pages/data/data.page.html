@@ -1,0 +1,36 @@
+<div class="content-white">
+    <nz-tabset [nzSelectedIndex]="number">
+        <nz-tab *ngFor="let tab of tabs" [nzTitle]="tab.name" [nzDisabled]="tab.disabled">
+            <div *ngIf="number == 0">
+                <nz-descriptions nzTitle="" nzBordered nzSize="size">
+                    <nz-descriptions-item nzTitle=" 版本">
+                        101
+                    </nz-descriptions-item>
+                    <nz-descriptions-item nzTitle="驱动">
+                        com.mysql.cj.jdbc.Driver<br />
+                        com.alibaba.druid.mock.MockDriver<br />
+                        com.alibaba.druid.proxy.DruidDriver
+                    </nz-descriptions-item>
+                    <nz-descriptions-item nzTitle="是否允许重置">
+                        是
+                    </nz-descriptions-item>
+                    <nz-descriptions-item nzTitle="重置次数">
+                        1
+                    </nz-descriptions-item>
+                    <nz-descriptions-item nzTitle="Java版本">
+                        1.8.0-111
+                    </nz-descriptions-item>
+                    <nz-descriptions-item nzTitle="JVM名称">
+                        Java HotSpot(TM) 64-Bit Server VM
+                    </nz-descriptions-item>
+                    <nz-descriptions-item nzTitle="classpath路径">
+                        target/tddx.jar
+                    </nz-descriptions-item>
+                    <nz-descriptions-item nzTitle="启动时间">
+                        2020-02-01 13:00:05
+                    </nz-descriptions-item>
+                </nz-descriptions>
+            </div>
+        </nz-tab>
+    </nz-tabset>
+</div>

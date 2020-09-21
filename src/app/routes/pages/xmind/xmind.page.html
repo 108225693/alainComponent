@@ -1,0 +1,107 @@
+<div [ngClass]="tableshow" class="wrap">
+    <div>
+        思维导图名称：<input type="text" nz-input [(ngModel)]="nameValue" style="width:150px" />&nbsp;&nbsp;&nbsp;
+        <button nz-button nzType="primary" (click)="search()"><i nz-icon nzType="search"></i>查询</button>
+    </div>
+    <div style="padding:15px 0;">
+        <button nz-button nzType="primary" (click)="add()"><i nz-icon nzType="plus-circle"></i>新增</button>
+        <button nz-button nzType="default" (click)="delModalShow()" class="button-red"><i nz-icon
+                nzType="delete"></i>删除</button>
+        <button nz-button nzType="primary" (click)="detail()" nzGhost><i nz-icon nzType="edit"></i>修改/查看</button>
+    </div>
+    <div>
+        <nz-table #rowSelectionTable nzBordered nzShowPagination nzShowSizeChanger [nzData]="listOfAllData"
+            (nzCurrentPageDataChange)="currentPageDataChange($event)">
+            <thead>
+                <tr>
+                    <th nzWidth="50px" nzShowCheckbox [(nzChecked)]="allChecked" [nzIndeterminate]="indeterminate"
+                        (nzCheckedChange)="checkAll($event)"></th>
+                    <th>思维导图ID</th>
+                    <th>思维导图名称</th>
+                    <th>创建人</th>
+                    <th>创建日期</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of rowSelectionTable.data;index as i">
+                    <td nzShowCheckbox [(nzChecked)]="data.checked" (nzCheckedChange)="refreshStatus()"></td>
+                    <td>{{ data.rootId }}</td>
+                    <td>{{ data.topic | stringData:'xmindTitle'}}</td>
+                    <td>{{ data.operUser }}</td>
+                    <td>{{ data.operDate }}</td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </div>
+</div>
+
+<div [ngClass]="opershow">
+    <div id="jsmind_nav">
+        <div class="p10">
+            <ng-container *ngIf="operaType === 'add'">
+                <button nz-button nzType="primary" nzGhost (click)="back()"><i nz-icon nzType="rollback"></i>返回</button>
+                <button nz-button nzType="primary" (click)="submit()"><i nz-icon nzType="cloud-upload"></i>提交</button>
+            </ng-container>
+            <ng-container *ngIf="operaType === 'edit'">
+                <button nz-button nzType="primary" (click)="back()"><i nz-icon nzType="rollback"></i>返回</button>
+            </ng-container>
+            &nbsp;&nbsp;&nbsp;
+            <nz-radio-group>
+                <label nz-radio-button (click)="operaNode('addText')"><i nz-icon nzType="plus-circle"></i> 新增节点</label>
+                <label nz-radio-button (click)="operaNode('addImage')"><i nz-icon nzType="picture"></i> 新增图片</label>
+                <label nz-radio-button (click)="operaNode('addCalendar')"><i nz-icon nzType="calendar"></i>
+                    新增日期节点</label>
+                <label nz-radio-button (click)="operaNode('addPerson')"><i nz-icon nzType="user"></i> 新增人员节点</label>
+                <label nz-radio-button (click)="removeNode()"><i nz-icon nzType="rest" nzTheme="outline"></i>
+                    删除</label>
+            </nz-radio-group>
+            &nbsp;&nbsp;&nbsp;
+            <nz-radio-group>
+                <label nz-radio-button (click)="operaNode('copyPaste')"><i nz-icon nzType="copy"></i> 复制节点</label>
+            </nz-radio-group>
+            <div style="float:right">
+                <button nz-button nz-dropdown nzType="primary" nzGhost [nzDropdownMenu]="menu"
+                    nzPlacement="bottomRight">{{ onlineUser }}</button>
+                <nz-dropdown-menu #menu="nzDropdownMenu">
+                    <ul nz-menu>
+                        <li nz-menu-item *ngFor="let item of menuList">
+                            <nz-badge nzStatus="success"></nz-badge>{{ item }}
+                        </li>
+                    </ul>
+                </nz-dropdown-menu>
+            </div>
+            <div style="float:right;margin-right:10px;">
+                <nz-alert nzType="info" [nzMessage]="!alert.message || alert.message===' ' ? '可编辑':alert.message"
+                    nzShowIcon></nz-alert>
+            </div>
+        </div>
+    </div>
+    <div id="jsmind_container" [ngStyle]="fullHeight"></div>
+    <div class="hide">
+        <input class="file" type="file" id="image-chooser" accept="image/*" />
+    </div>
+</div>
+
+<nz-modal [(nzVisible)]="delModalVisible" nzTitle="删除" (nzOnCancel)="delModalCancel()" (nzOnOk)="delModalOk()">
+    <p>确定要删除 <span style="color: #ff0000;">{{deltext}}</span> 吗？</p>
+    <nz-alert nzType="warning" nzMessage="删除后将无法恢复" nzShowIcon></nz-alert>
+</nz-modal>
+
+<nz-modal [(nzVisible)]="detailModalVisible" nzTitle="详情" nzWidth="1000" (nzOnCancel)="detailModalCancel()"
+    (nzOnOk)="detailModalOk()">
+    <div style="text-align: center;"><img style="max-width:950px" [src]="base64Src"></div>
+</nz-modal>
+
+<nz-modal [(nzVisible)]="modalModalVisible" nzTitle="操作" (nzOnCancel)="modalModalCancel()" (nzOnOk)="modalModalOk()">
+    <div *ngIf="modalOperaType === 'date'">
+        <nz-date-picker [(ngModel)]="xmindDate"></nz-date-picker>
+    </div>
+    <div *ngIf="modalOperaType === 'person'">
+        <nz-select nzPlaceHolder="-请选择-" style="width:150px;margin-right:10px;">
+            <nz-option nzValue="1" nzLabel="测试部门"></nz-option>
+        </nz-select>
+        <nz-select nzPlaceHolder="-请选择-" [(ngModel)]="personValue" style="width:150px">
+            <nz-option *ngFor="let item of personSelect" [nzValue]="item.value" [nzLabel]="item.label"></nz-option>
+        </nz-select>
+    </div>
+</nz-modal>

@@ -1,0 +1,31 @@
+<nz-modal [(nzVisible)]="Visible" [nzWidth]="width" [nzTitle]="popTitle" (nzOnCancel)="Cancel()" (nzOnOk)="Ok()">
+    <div *ngIf="operaType === 'add' || operaType === 'edit'">
+        <nz-descriptions nzBordered nzSize="small">
+            <nz-descriptions-item nzTitle="车站名称 *" [nzSpan]="3">
+                <input class="wd" nz-input placeholder="请输入车站名称" [(ngModel)]="operaData.name" />
+            </nz-descriptions-item>
+            <nz-descriptions-item nzTitle="车站码 *" [nzSpan]="3">
+                <input class="wd" nz-input placeholder="请输入车站名称" [(ngModel)]="operaData.code" />
+            </nz-descriptions-item>
+            <nz-descriptions-item nzTitle="线路名称 *" [nzSpan]="3">
+                <nz-select class="wd" [(ngModel)]="operaData.lineId" nzPlaceHolder="请选择线路名称">
+                    <nz-option *ngFor="let option of lineList" [nzLabel]="option.name" [nzValue]="option.id">
+                    </nz-option>
+                </nz-select>
+            </nz-descriptions-item>
+            <nz-descriptions-item nzTitle="排序 *" [nzSpan]="3">
+                <nz-select class="wd" [(ngModel)]="operaData.nOrder" nzPlaceHolder="请选择排序">
+                    <nz-option *ngFor="let item of sortList" [nzLabel]="item" [nzValue]="item">
+                    </nz-option>
+                </nz-select>
+            </nz-descriptions-item>
+        </nz-descriptions>
+    </div>
+    <div *ngIf="operaType === 'del'">
+        确定要{{popTitle}}这 <span style="font-weight:bold;color:#ff0000">{{thisData.count}}</span> 条数据吗？
+    </div>
+    <div *ngIf="operaType === 'pz' || operaType === 'bh'">
+        <textarea nz-input [placeholder]="'请输入'+popTitle+'审批意见'" [(ngModel)]="operaData.yj"
+            [nzAutosize]="{ minRows: 5, maxRows: 5 }"></textarea>
+    </div>
+</nz-modal>

@@ -1,0 +1,4 @@
+<nz-modal [(nzVisible)]="Visible" nzTitle="删除" (nzOnCancel)="Cancel()" (nzOnOk)="Ok()">
+    <p>确定要删除 <span style="color: #ff0000;">{{deltext}}</span> 这条记录吗？</p>
+    <nz-alert nzType="warning" nzMessage="删除后将无法恢复" nzShowIcon></nz-alert>
+</nz-modal>

@@ -1,0 +1,85 @@
+<div nz-row class="content-white">
+    <div>
+        <nz-alert style="margin-bottom:10px" nzType="success" nzMessage="成功提示" nzShowIcon></nz-alert>
+        <nz-alert style="margin-bottom:10px" nzType="info" nzMessage="通知提示" nzShowIcon></nz-alert>
+        <nz-alert style="margin-bottom:10px" nzType="warning" nzMessage="警告提示" nzShowIcon></nz-alert>
+        <nz-alert style="margin-bottom:10px" nzType="error" nzMessage="错误提示" nzShowIcon></nz-alert>
+    </div>
+
+    <div style="padding-top:20px">
+        <nz-steps [nzCurrent]="current" nzSize="small">
+            <nz-step nzTitle="已完成"></nz-step>
+            <nz-step nzTitle="进行中"></nz-step>
+            <nz-step nzTitle="未开始"></nz-step>
+        </nz-steps>
+    </div>
+
+    <div style="padding-top:20px">
+        <nz-breadcrumb>
+            <nz-breadcrumb-item>
+                <i nz-icon nzType="home"></i>
+            </nz-breadcrumb-item>
+            <nz-breadcrumb-item>
+                <a>用户中心</a>
+            </nz-breadcrumb-item>
+            <nz-breadcrumb-item>
+                个人信息
+            </nz-breadcrumb-item>
+        </nz-breadcrumb>
+    </div>
+
+    <div style="padding-top:20px">
+        <nz-progress [nzPercent]="30"></nz-progress>
+        <nz-progress [nzPercent]="50" nzStatus="active"></nz-progress>
+        <nz-progress [nzPercent]="70" nzStatus="exception"></nz-progress>
+        <nz-progress [nzPercent]="100"></nz-progress>
+        <nz-progress [nzPercent]="50" [nzShowInfo]="false"></nz-progress>
+    </div>
+
+    <div style="padding-top:20px">
+        <nz-progress [nzPercent]="75" nzType="circle" [nzWidth]="80"></nz-progress>
+        &nbsp;&nbsp;&nbsp;
+        <nz-progress [nzPercent]="70" nzType="circle" [nzWidth]="80" nzStatus="exception"></nz-progress>
+        &nbsp;&nbsp;&nbsp;
+        <nz-progress [nzPercent]="100" nzType="circle" [nzWidth]="80"></nz-progress>
+    </div>
+
+    <div style="padding-top:20px">
+        <nz-tag [nzColor]="'magenta'">magenta</nz-tag>
+        <nz-tag [nzColor]="'red'">red</nz-tag>
+        <nz-tag [nzColor]="'volcano'">volcano</nz-tag>
+        <nz-tag [nzColor]="'orange'">orange</nz-tag>
+        <nz-tag [nzColor]="'gold'">gold</nz-tag>
+        <nz-tag [nzColor]="'lime'">lime</nz-tag>
+        <nz-tag [nzColor]="'green'">green</nz-tag>
+        <nz-tag [nzColor]="'cyan'">cyan</nz-tag>
+        <nz-tag [nzColor]="'blue'">blue</nz-tag>
+        <nz-tag [nzColor]="'geekblue'">geekblue</nz-tag>
+        <nz-tag [nzColor]="'purple'">purple</nz-tag>
+    </div>
+
+    <div style="padding-top:20px">
+        <button nz-button nzTooltipTitle="这里是内容" nzTooltipPlacement="topCenter" nz-tooltip>
+            鼠标放上去上面显示提示
+        </button>
+        <button nz-button nzTooltipTitle="这里是内容" nzTooltipPlacement="bottomCenter" nz-tooltip>
+            鼠标放上去下面显示提示
+        </button>
+    </div>
+
+    <div style="padding-top:20px">
+        <button nz-button (click)="createMessage('success')">点击出现：顶部显示成功提示</button>
+        <button nz-button (click)="createMessage('error')">点击出现：顶部显示失败提示</button>
+        <button nz-button (click)="createMessage('warning')">点击出现：顶部显示通用提示</button>
+    </div>
+
+    <div style="padding-top:20px">
+        <a nz-popconfirm nzPopconfirmTitle="确定要删除?" nzOkText="确定" nzCancelText="取消" (nzOnConfirm)="confirm()"
+            (nzOnCancel)="cancel()">点击出现确认删除提示</a>
+        <nz-modal [(nzVisible)]="isVisible" nzTitle="提示" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+            <p>内容.....</p>
+            <p>内容..........</p>
+            <p>内容...............</p>
+        </nz-modal>
+    </div>
+</div>

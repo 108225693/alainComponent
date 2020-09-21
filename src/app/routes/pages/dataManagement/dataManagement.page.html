@@ -1,0 +1,15 @@
+<div class="content-white">
+    <p>
+        <!-- <button nz-button nzType="primary" (click)="LoadDatabase()" nzGhost>导入数据库</button> -->
+        <nz-upload [nzAction]="LoadDatabaseUrl" [nzCustomRequest]="LoadDatabaseReq">
+            <button nz-button nzType="primary" nzGhost><i nz-icon nzType="upload"></i>导入数据库</button>
+        </nz-upload>
+        {{LoadDatabaseText}}
+    </p>
+    <nz-divider></nz-divider>
+    <p>
+        <button nz-button nzType="primary" (click)="exportDatabase()" nzGhost><i nz-icon
+                nzType="download"></i>导出数据库</button>
+
+    </p>
+</div>

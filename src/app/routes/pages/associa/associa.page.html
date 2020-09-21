@@ -1,0 +1,127 @@
+<div class="save">
+    <button nz-button nzType="primary" (click)="save()"><i nz-icon nzType="save"></i>提交</button>
+</div>
+<div nz-row>
+    <div nz-col nzSpan="6">
+        <div class="wrap br" [ngStyle]="fullHeight">
+            <nz-tree #nzTreeComponent *ngIf="treeStatus" [nzData]="orgNodes" nzShowLine nzExpandAll="true"
+                [nzExpandedKeys]="'-1'" (nzClick)="orgTreeClick($event)">
+            </nz-tree>
+        </div>
+    </div>
+    <div nz-col nzSpan="6">
+        <div class="wrap" [ngStyle]="fullHeight">
+            <nz-table #userTable nzBordered [nzShowPagination]="false" [nzData]="userList">
+                <thead>
+                    <tr>
+                        <th nzWidth="50px"></th>
+                        <th>用户名称</th>
+                        <th>登录名称</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of userTable.data;index as i">
+                        <td nzShowCheckbox [(nzChecked)]="data.checked" (nzCheckedChange)="userChecked(data,i)">
+                        <td>{{ data.name }}</td>
+                        <td>{{ data.loginName }}</td>
+                    </tr>
+                </tbody>
+            </nz-table>
+        </div>
+    </div>
+    <div nz-col nzSpan="6">
+        <div class="wrap bl" [ngStyle]="fullHeight">
+            <nz-table #roleTable nzBordered [nzShowPagination]="false" [nzData]="roleList">
+                <thead>
+                    <tr>
+                        <th nzWidth="50px"></th>
+                        <th>角色名称</th>
+                        <th>备注</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of roleTable.data;index as i">
+                        <td nzShowCheckbox [(nzChecked)]="data.checked">
+                        <td>{{ data.name }}</td>
+                        <td>{{ data.remarks }}</td>
+                    </tr>
+                </tbody>
+            </nz-table>
+        </div>
+    </div>
+    <div nz-col nzSpan="6">
+        <div class="wrap bl" [ngStyle]="fullHeight">
+            <nz-alert *ngIf="menuNodes.length === 0" nzType="info" nzMessage="选择用户后，可查看对应功能" nzShowIcon>
+            </nz-alert>
+            <nz-tree *ngIf="menuNodes.length !== 0" #nzTreeComponent [nzData]="menuNodes" nzShowLine nzExpandAll="true"
+                [nzExpandedKeys]="'-1'">
+            </nz-tree>
+        </div>
+    </div>
+</div>
+<!-- <div class="content-white">
+    <div>
+        用户名称：<nz-select nzAllowClear nzPlaceHolder="--请选择--" [(ngModel)]="userValue" style="width:200px">
+            <nz-option *ngFor="let item of userSelect" [nzValue]="item.value" [nzLabel]="item.label">
+            </nz-option>
+        </nz-select>&nbsp;&nbsp;&nbsp;
+        角色名称：<nz-select nzAllowClear nzPlaceHolder="--请选择--" [(ngModel)]="roleValue" style="width:200px">
+            <nz-option *ngFor="let item of roleSelect" [nzValue]="item.value" [nzLabel]="item.label">
+            </nz-option>
+        </nz-select>&nbsp;&nbsp;&nbsp;
+        <button nz-button nzType="primary" (click)="search()"><i nz-icon nzType="search"></i>查询</button>
+    </div>
+    <div style="padding:15px 0;">
+        <button nz-button nzType="primary" (click)="addModalShow()"><i nz-icon nzType="plus-circle"></i>新增</button>
+        <button nz-button nzType="default" (click)="delModalShow()" class="button-red"><i nz-icon
+                nzType="delete"></i>删除</button>
+        <button nz-button nzType="primary" (click)="editModalShow()" nzGhost><i nz-icon nzType="edit"></i>修改</button>
+        <button nz-button nzType="primary" (click)="menuModalShow()" nzGhost><i nz-icon nzType="apartment"></i>菜单权限配置
+            [NO_API]</button>
+        <button nz-button nzType="primary" (click)="dataModalShow()" nzGhost><i nz-icon nzType="hdd"></i>数据权限
+            [NO_API]</button>
+    </div>
+    <div>
+        <nz-table #rowSelectionTable nzBordered nzShowPagination nzShowSizeChanger [nzData]="listOfAllData"
+            (nzCurrentPageDataChange)="currentPageDataChange($event)">
+            <thead>
+                <tr>
+                    <th nzWidth="50px" nzShowCheckbox [(nzChecked)]="allChecked" [nzIndeterminate]="indeterminate"
+                        (nzCheckedChange)="checkAll($event)"></th>
+                    <th nzWidth="200px">用户编号</th>
+                    <th nzWidth="200px">用户ID</th>
+                    <th nzWidth="300px">角色ID</th>
+                    <th>角色名称</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of rowSelectionTable.data;index as i">
+                    <td nzShowCheckbox [(nzChecked)]="data.checked" (nzCheckedChange)="refreshStatus()">
+                    <td>{{ data.id }}</td>
+                    <td>{{ data.userId }}</td>
+                    <td>{{ data.roleId }}</td>
+                    <td>{{ data.roleName }}</td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </div>
+</div>
+
+<app-operamodal *ngIf="addModalVisible" [operaType]="'add'" (closeModal)="addModalHide()" (reloadData)="loadList()">
+</app-operamodal>
+
+<app-operamodal *ngIf="editModalVisible" [operaType]="'edit'" [responseData]="tempData" (closeModal)="editModalHide()"
+    (reloadData)="loadList()">
+</app-operamodal>
+
+<app-operamodal *ngIf="delModalVisible" [operaType]="'del'" [responseData]="tempData" (closeModal)="delModalHide()"
+    (reloadData)="loadList()">
+</app-operamodal>
+
+<app-operamodal *ngIf="menuModalVisible" [operaType]="'menu'" (closeModal)="menuModalHide()" (reloadData)="loadList()">
+</app-operamodal>
+
+<app-operamodal *ngIf="dataModalVisible" [operaType]="'data'" [responseData]="tempData" (closeModal)="dataModalHide()"
+    (reloadData)="loadList()">
+</app-operamodal>
+  -->

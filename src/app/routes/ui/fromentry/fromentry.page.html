@@ -1,0 +1,179 @@
+<div class="content-white">
+    <div>
+        <label nz-checkbox chacked>多选1</label>
+        <label nz-checkbox>多选2</label>
+        <label nz-checkbox>多选3</label>
+    </div>
+
+    <div style="padding-top:10px">
+        <nz-radio-group>
+            <label nz-radio nzValue="A">单选A</label>
+            <label nz-radio nzValue="B">单选B</label>
+            <label nz-radio nzValue="C">单选C</label>
+            <label nz-radio nzValue="D">单选D</label>
+        </nz-radio-group>
+    </div>
+
+    <div style="padding-top:10px">
+        <nz-rate [ngModel]="2.5" nzAllowHalf></nz-rate>
+    </div>
+
+    <div style="padding-top:10px">
+        <nz-switch [ngModel]="true" nzCheckedChildren="开" nzUnCheckedChildren="关"></nz-switch>
+        &nbsp;&nbsp;&nbsp;
+        <nz-switch [ngModel]="false" nzCheckedChildren="1" nzUnCheckedChildren="0"></nz-switch>
+        &nbsp;&nbsp;&nbsp;
+        <nz-switch [ngModel]="true" [nzCheckedChildren]="checkedTemplate" [nzUnCheckedChildren]="unCheckedTemplate">
+        </nz-switch>
+        <ng-template #checkedTemplate><i nz-icon nzType="check"></i></ng-template>
+        <ng-template #unCheckedTemplate><i nz-icon nzType="close"></i></ng-template>
+    </div>
+
+    <div style="padding-top:10px">
+        <button nz-button nzType="primary" (click)="open('top')">侧滑框-向上</button>
+        <button nz-button nzType="primary" (click)="open('right')">侧滑框-向右</button>
+        <button nz-button nzType="primary" (click)="open('bottom')">侧滑框-向下</button>
+        <button nz-button nzType="primary" (click)="open('left')">侧滑框-向左</button>
+    </div>
+
+    <div style="padding-top:10px">
+        <input style="width:200px;" nz-input placeholder="可输入单行文字" /><br />
+        <input style="width:200px;margin-top:10px" nz-input placeholder="不可编辑" [disabled]="true" />
+        <br />
+        <textarea style="width:200px;margin-top:10px" rows="4" nz-input></textarea>
+        <br />
+        <nz-date-picker style="margin-top:10px"></nz-date-picker>
+        <br />
+        <nz-select [(ngModel)]="selectedValue" style="width:100px;margin-top:10px" nzAllowClear nzPlaceHolder="选择">
+            <nz-option nzValue="jack" nzLabel="张三"></nz-option>
+            <nz-option nzValue="lucy" nzLabel="李四"></nz-option>
+            <nz-option nzValue="disabled" nzLabel="不可选" nzDisabled></nz-option>
+        </nz-select>
+    </div>
+
+    <div style="padding-top:10px">
+        <nz-tree-select style="width: 300px" [nzNodes]="nodes" [nzMultiple]="true" nzShowSearch nzPlaceHolder="请选择"
+            [(ngModel)]="value" (ngModelChange)="onChange($event)"></nz-tree-select>
+    </div>
+
+    <div style="padding-top:10px">
+        <input style="width: 300px" placeholder="输入单个字可自动匹配" nz-input [(ngModel)]="inputValue"
+            (ngModelChange)="onChange($event)" [nzAutocomplete]="auto" />
+        <nz-autocomplete [nzDataSource]="filteredOptions" #auto></nz-autocomplete>
+    </div>
+
+    <div style="padding-top:20px">
+        <form nz-form>
+            <nz-form-item>
+                <nz-form-label [nzSpan]="3">用户名</nz-form-label>
+                <nz-form-control [nzSpan]="14" nzValidateStatus="error" nzHasFeedback nzErrorTip="如：Tddx123456">
+                    <input nz-input [ngModel]="'测试用户名'" name="errorValid" />
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSpan]="3">邮箱</nz-form-label>
+                <nz-form-control [nzSpan]="14" nzValidateStatus="warning" nzHasFeedback>
+                    <input nz-input [ngModel]="'abc@123.com'" name="warningValid" />
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSpan]="3">重复邮箱</nz-form-label>
+                <nz-form-control [nzSpan]="14" nzValidateStatus="validating" nzHasFeedback nzValidatingTip="验证中...">
+                    <input nz-input [ngModel]="'abc@123.com'" name="validating" />
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSpan]="3">备注</nz-form-label>
+                <nz-form-control [nzSpan]="14" nzValidateStatus="success" nzHasFeedback>
+                    <input nz-input [ngModel]="'测试备注'" name="successValid" />
+                </nz-form-control>
+            </nz-form-item>
+        </form>
+    </div>
+
+    <div style="padding-top:10px">
+        <nz-descriptions nzBordered>
+            <nz-descriptions-item nzTitle="产品">云存储</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="计费模式">预付款</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="自动续费">是</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="订货时间">
+                2018-04-24 18:00:00
+            </nz-descriptions-item>
+            <nz-descriptions-item nzTitle="使用时间" [nzSpan]="2">
+                2018-04-24 18:00:00 至 2019-04-24 18:00:00
+            </nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Status" [nzSpan]="3">
+                <nz-badge nzStatus="processing" nzText="运行中"></nz-badge>
+            </nz-descriptions-item>
+            <nz-descriptions-item nzTitle="预售价">$80.00</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="折扣">$20.00</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="折扣后价格">$60.00</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="配置信息">
+                数据磁盘类型: MongoDB
+                <br />
+                数据库版本: 3.4
+                <br />
+                包含: dds.mongo.mid
+                <br />
+                存储空间: 10 GB
+                <br />
+                地区: 中国<br />
+            </nz-descriptions-item>
+        </nz-descriptions>
+    </div>
+</div>
+
+<nz-drawer [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow: 'auto', 'padding-bottom': '53px' }"
+    [nzMaskClosable]="false" [nzPlacement]="placement" [nzWidth]="350" [nzVisible]="visible" nzTitle="侧滑框"
+    (nzOnClose)="close()">
+    <form nz-form>
+        <div nz-row nzGutter="8">
+            <div nz-col nzSpan="24">
+                <nz-form-item>
+                    <nz-form-label>项目名</nz-form-label>
+                    <nz-form-control>
+                        <input nz-input placeholder="请输入项目名" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div nz-col nzSpan="24">
+                <nz-form-item>
+                    <nz-form-label>地址</nz-form-label>
+                    <nz-form-control>
+                        <nz-input-group nzAddOnBefore="http://" nzAddOnAfter=".com">
+                            <input type="text" nz-input placeholder="请输入接口地址" />
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </div>
+        <div nz-row nzGutter="8">
+            <div nz-col nzSpan="12">
+                <nz-form-item>
+                    <nz-form-label>参数</nz-form-label>
+                    <nz-form-control>
+                        <nz-select nzPlaceHolder="-请选择-"></nz-select>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div nz-col nzSpan="12">
+                <nz-form-item>
+                    <nz-form-label>类型</nz-form-label>
+                    <nz-form-control>
+                        <nz-select nzPlaceHolder="-请选择-"></nz-select>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </div>
+        <div nz-row nzGutter="8">
+            <div nz-col nzSpan="24">
+                <nz-form-item>
+                    <nz-form-label>备注</nz-form-label>
+                    <nz-form-control>
+                        <textarea nz-input placeholder="请输入备注" [nzAutosize]="{ minRows: 4, maxRows: 4 }"></textarea>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </div>
+    </form>
+</nz-drawer>

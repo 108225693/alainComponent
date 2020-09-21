@@ -1,0 +1,53 @@
+<div class="save">
+    <button nz-button nzType="primary" (click)="save()"><i nz-icon nzType="save"></i>提交</button>
+</div>
+<div nz-row>
+    <div nz-col nzSpan="8">
+        <div class="wrap br" [ngStyle]="fullHeight">
+            <nz-table #userTable nzBordered [nzShowPagination]="false" [nzData]="roleList">
+                <thead>
+                    <tr>
+                        <th nzWidth="50px"></th>
+                        <th>角色名称</th>
+                        <th>备注</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of userTable.data;index as i">
+                        <td nzShowCheckbox [(nzChecked)]="data.checked" (nzCheckedChange)="roleChecked(data,i)">
+                        <td>{{ data.name }}</td>
+                        <td>{{ data.remarks }}</td>
+                    </tr>
+                </tbody>
+            </nz-table>
+        </div>
+    </div>
+    <div nz-col nzSpan="8">
+        <div class="wrap" [ngStyle]="fullHeight">
+            <nz-alert *ngIf="dataList.length === 0" nzType="info" nzMessage="请先选择角色" nzShowIcon></nz-alert>
+            <nz-table *ngIf="dataList.length !== 0" #dataTable nzBordered [nzShowPagination]="false"
+                [nzData]="dataList">
+                <thead>
+                    <tr>
+                        <th nzWidth="50px"></th>
+                        <th>权限类型</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of dataTable.data;index as i">
+                        <td nzShowCheckbox [(nzChecked)]="data.checked" (nzCheckedChange)="dataChecked(data,i)">
+                        <td>{{ data.name }}</td>
+                    </tr>
+                </tbody>
+            </nz-table>
+        </div>
+    </div>
+    <div nz-col nzSpan="8">
+        <div class="wrap bl" [ngStyle]="fullHeight">
+            <nz-alert *ngIf="!orgStatus" nzType="info" nzMessage="选择自定义部门后才可选" nzShowIcon></nz-alert>
+            <nz-tree *ngIf="orgStatus" #nzTreeComponent [nzData]="orgNodes" nzCheckable nzMultiple nzShowLine
+                nzExpandAll="true" [nzCheckedKeys]="defaultExpandedKeys" (nzCheckBoxChange)="menuTreeClick($event)">
+            </nz-tree>
+        </div>
+    </div>
+</div>

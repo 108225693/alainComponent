@@ -1,0 +1,67 @@
+<div class="content-white">
+    <!-- <div>
+        菜单名称：<input type="text" [(ngModel)]="nameValue" nz-input style="width:200px" />&nbsp;&nbsp;&nbsp;
+        <button nz-button nzType="primary" (click)="search()"><i nz-icon nzType="search"></i>查询</button>
+    </div> -->
+    <div style="padding:0 0 15px 0;">
+        <button nz-button nzType="primary" (click)="addModalShow()"><i nz-icon nzType="plus-circle"></i>新增</button>
+        <!-- <button nz-button nzType="default" (click)="delModalShow()" class="button-red"><i nz-icon
+                nzType="delete"></i>删除</button>
+        <button nz-button nzType="primary" (click)="editModalShow()" nzGhost><i nz-icon nzType="edit"></i>修改</button> -->
+    </div>
+    <div>
+        <nz-table #rowSelectionTable nzBordered nzShowPagination nzShowSizeChanger [nzData]="listOfAllData"
+            (nzCurrentPageDataChange)="currentPageDataChange($event)">
+            <thead>
+                <tr>
+                    <th nzWidth="60px"></th>
+                    <th nzWidth="150px">菜单ID</th>
+                    <th nzWidth="150px">父级ID</th>
+                    <th nzWidth="100px">图标</th>
+                    <th nzWidth="200px">菜单名称</th>
+                    <th nzWidth="100px">排序</th>
+                    <th>页面链接</th>
+                    <th nzWidth="100px">是否外链</th>
+                    <th nzWidth="150px">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let data of rowSelectionTable.data">
+                    <ng-container *ngFor="let item of mapOfExpandedData[data.id]">
+                        <tr *ngIf="(item.parent && item.parent.expand) || !item.parent">
+                            <td [nzIndentSize]="item.level" [nzShowExpand]="!!item.children && !!item.children.length"
+                                [(nzExpand)]="item.expand"
+                                (nzExpandChange)="collapse(mapOfExpandedData[data.id], item, $event)"></td>
+                            <td>{{ item.id }}</td>
+                            <td>{{ !item.pid ? '--' : item.pid }}</td>
+                            <td>
+                                <span *ngIf="!item.icon">--</span>
+                                <span *ngIf="item.icon"><i nz-icon [nzType]="item.icon" nzTheme="outline"></i></span>
+                            </td>
+                            <td>{{ !item.title ? '--' : item.title }}</td>
+                            <td>{{ !item.num ? '--' : item.num }}</td>
+                            <td>{{ !item.href ? '--' : item.href }}</td>
+                            <td>{{ !item.extra ? '--' : item.extra }}</td>
+                            <td>
+                                <a (click)="editModalShow(item)" class="font-green">修改</a>
+                                <nz-divider nzType="vertical"></nz-divider>
+                                <a (click)="delModalShow(item)" class="font-red">删除</a>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </ng-container>
+            </tbody>
+        </nz-table>
+    </div>
+</div>
+
+<app-operamodal *ngIf="addModalVisible" [operaType]="'add'" (closeModal)="addModalHide()" (reloadData)="loadList()">
+</app-operamodal>
+
+<app-operamodal *ngIf="editModalVisible" [operaType]="'edit'" [responseData]="tempData" (closeModal)="editModalHide()"
+    (reloadData)="loadList()">
+</app-operamodal>
+
+<app-delmodal *ngIf="delModalVisible" [apiUrl]="'/system/menu/delete'" [responseData]="tempData"
+    (closeModal)="delModalHide()" (reloadData)="loadList()">
+</app-delmodal>

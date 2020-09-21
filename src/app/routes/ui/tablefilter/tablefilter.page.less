@@ -1,0 +1,50 @@
+:host ::ng-deep {
+    .component-table-blue {
+        .ant-table-thead>tr>th {
+            padding    : 0 10px;
+            line-height: 38px;
+            background : #2b90f7;
+            color      : #fff;
+            text-align : center;
+        }
+
+        .ant-table-tbody>tr {
+            >td {
+                padding    : 10px;
+                line-height: 24px;
+            }
+
+            &:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected)>td {
+                background: #eee;
+            }
+
+            &.checked {
+                >td {
+                    background: #e6f7ff;
+                }
+            }
+        }
+    }
+
+    .ant-table-filter-dropdown-link.confirm {
+        float: inherit;
+    }
+}
+
+.search-box {
+    padding: 8px;
+}
+
+.search-box input {
+    width        : 188px;
+    margin-bottom: 8px;
+    display      : block;
+}
+
+.search-box button {
+    width: 90px;
+}
+
+.search-button {
+    margin-right: 8px;
+}

@@ -1,0 +1,146 @@
+<div class="wrap">
+    <div class="col30">
+        <div class="bgw">
+            <div class="heading">
+                <span class="title">个人日程</span>
+                <span class="add"><button nz-button nzSize="small" nzType="default">新建日程<i nz-icon
+                            nzType="plus"></i></button></span>
+                <div class="clear"></div>
+            </div>
+            <nz-calendar [nzFullscreen]="false" (nzSelectChange)="onValueChange($event)"
+                (nzPanelChange)="onPanelChange($event)"></nz-calendar>
+        </div>
+    </div>
+    <div class="col35">
+        <div class="bgw ml16">
+            <div class="heading">
+                <span class="title">常用功能</span>
+                <span class="add"><button nz-button nzType="link" nzGhost><i nz-icon nzType="setting"
+                            nzTheme="outline"></i></button></span>
+                <div class="clear"></div>
+            </div>
+            <div nz-row class="versatile">
+                <div nz-col nzSpan="6" class="list" *ngFor="let item of versatile">
+                    <nz-avatar [nzSize]="52" [nzIcon]="item.icon" [ngStyle]="{'background-color':item.color}">
+                    </nz-avatar>
+                    <div class="name">{{item.name}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col35">
+        <div class="bgw ml16">
+            <div class="slider">
+                <nz-carousel nzAutoPlay>
+                    <div nz-carousel-content *ngFor="let item of banner">
+                        <img [src]="item" class="banner">
+                    </div>
+                </nz-carousel>
+            </div>
+            <div class="heading">
+                <span class="title">通知公告</span>
+                <span class="add"><button nz-button nzSize="small" nzType="default">查看全部<i nz-icon nzType="right"
+                            nzTheme="outline"></i></button></span>
+                <div class="clear"></div>
+            </div>
+            <div class="notice">
+                <li *ngFor="let item of notice">
+                    <span class="fl">
+                        <ellipsis length="18" tooltip>{{ item.name }}</ellipsis>
+                    </span>
+                    <span class="fr">{{item.time}}</span></li>
+                <div class="clear"></div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="wrap mt16">
+    <div class="col30">
+        <div class="bgw">
+            <div class="heading">
+                <span class="title">日程安排</span>
+                <span class="add"><button nz-button nzSize="small" nzType="default">查看全部<i nz-icon nzType="right"
+                            nzTheme="outline"></i></button></span>
+                <div class="clear"></div>
+            </div>
+            <div style="padding:15px 20px">
+                <nz-timeline>
+                    <nz-timeline-item>核对年月周表产生的缺陷问题 <br />2020-01-10</nz-timeline-item>
+                    <nz-timeline-item>年度、月计划及周计划功能测试记录<br />2020-01-10</nz-timeline-item>
+                    <nz-timeline-item nzColor="red" [nzDot]="dotTemplate">月计划驳回功能开发<br />2020-01-09
+                    </nz-timeline-item>
+                    <nz-timeline-item nzColor="green">集中监测问题模块，问题级别统计相关修改要求<br />2020-01-08</nz-timeline-item>
+                    <nz-timeline-item nzColor="green">防疫网站开发<br />2020-01-07</nz-timeline-item>
+                </nz-timeline>
+                <ng-template #dotTemplate>
+                    <i nz-icon nzType="clock-circle-o" style="font-size: 16px;"></i>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+    <div class="col70">
+        <div class="bgw ml16">
+            <div class="heading">
+                <span class="title">待办事项</span>
+                <span class="add"><button nz-button nzSize="small" nzType="default">查看全部<i nz-icon nzType="right"
+                            nzTheme="outline"></i></button></span>
+                <div class="clear"></div>
+            </div>
+            <div style="text-align: right;padding:12px 0;">
+                <nz-badge [nzCount]="5">
+                    <span class="badge">待审批</span>
+                </nz-badge>
+                <nz-badge [nzCount]="0">
+                    <span class="badge">待提交</span>
+                </nz-badge>
+                <nz-badge [nzCount]="132">
+                    <span class="badge">待查看</span>
+                </nz-badge>
+                <nz-badge [nzCount]="10">
+                    <span class="badge">待完成</span>
+                </nz-badge>
+                <nz-badge [nzCount]="0">
+                    <span class="badge">被驳回</span>
+                </nz-badge>
+            </div>
+            <div style="padding:0 15px;">
+                <nz-table #basicTable [nzData]="listOfData" nzBordered nzShowPagination="false">
+                    <thead>
+                        <tr>
+                            <th nzWidth="50px">序号</th>
+                            <th nzWidth="80px">类别</th>
+                            <th nzWidth="100px">附件</th>
+                            <th nzWidth="60px">人员</th>
+                            <th nzWidth="80px">时间</th>
+                            <th nzWidth="80px">所属段</th>
+                            <th nzWidth="80px">所属工区</th>
+                            <th nzWidth="120px">内容说明</th>
+                            <th>备注</th>
+                            <th nzWidth="80px">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of basicTable.data;index as i">
+                            <td>{{ +i+1 }}</td>
+                            <td>{{ data.class }}</td>
+                            <td><a>{{ data.attchments }}</a></td>
+                            <td>{{ data.person }}</td>
+                            <td>{{ data.time }}</td>
+                            <td>{{ data.section }}</td>
+                            <td>{{ data.area }}</td>
+                            <td>{{ data.content }}</td>
+                            <td>{{ data.remarks }}</td>
+                            <td>
+                                <a>批准</a>
+                                <nz-divider nzType="vertical"></nz-divider>
+                                <a>驳回</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </nz-table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clear"></div>

@@ -1,0 +1,53 @@
+<div class="content-white">
+    <div>
+        字典名称：<input type="text" [(ngModel)]="dictValue" nz-input style="width:180px" />
+        &nbsp;&nbsp;&nbsp;
+        类型名称：<input type="text" [(ngModel)]="dictTypeValue" nz-input style="width:180px" />
+        &nbsp;&nbsp;&nbsp;
+        <button nz-button nzType="primary" (click)="search()"><i nz-icon nzType="search"></i>查询</button>
+    </div>
+    <div style="padding:15px 0;">
+        <button nz-button nzType="primary" (click)="addModalShow()"><i nz-icon nzType="plus-circle"></i>新增</button>
+        <button nz-button nzType="default" class="button-red" (click)="delModalShow()"><i nz-icon
+                nzType="delete"></i>删除</button>
+        <button nz-button nzType="primary" nzGhost (click)="editModalShow()"><i nz-icon nzType="edit"></i>修改</button>
+    </div>
+    <div>
+        <nz-table #rowSelectionTable nzBordered nzShowPagination nzShowSizeChanger [nzData]="listOfAllData"
+            (nzCurrentPageDataChange)="currentPageDataChange($event)">
+            <thead>
+                <tr>
+                    <th nzWidth="50px" nzShowCheckbox [(nzChecked)]="allChecked" [nzIndeterminate]="indeterminate"
+                        (nzCheckedChange)="checkAll($event)"></th>
+                    <th>序号</th>
+                    <th>字典名称</th>
+                    <th>字典类型</th>
+                    <th>排序</th>
+                    <th>备注</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of rowSelectionTable.data;index as i">
+                    <td nzShowCheckbox [(nzChecked)]="data.checked" (nzCheckedChange)="refreshStatus()">
+                    <td>{{ +i+1 }}</td>
+                    <td>{{ data.name }}</td>
+                    <td>{{ data.typeName }}</td>
+                    <td>{{ data.nOrder }}</td>
+                    <td>{{ data.remark }}</td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </div>
+</div>
+
+<app-operamodal *ngIf="addModalVisible" [operaType]="'add'" (closeModal)="addModalHide()"
+    (reloadData)="loadList(tableList)">
+</app-operamodal>
+
+<app-operamodal *ngIf="editModalVisible" [operaType]="'edit'" [responseData]="tempData" (closeModal)="editModalHide()"
+    (reloadData)="loadList(tableList)">
+</app-operamodal>
+
+<app-operamodal *ngIf="delModalVisible" [operaType]="'del'" [responseData]="tempData" (closeModal)="delModalHide()"
+    (reloadData)="loadList(tableList)">
+</app-operamodal>

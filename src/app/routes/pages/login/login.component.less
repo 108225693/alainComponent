@@ -1,0 +1,100 @@
+@import '~@delon/theme/styles/default';
+
+:host {
+  display: block;
+  width  : 368px;
+  margin : 0 auto;
+
+  :host ::ng-deep {
+    i.anticon-eye {
+      cursor: pointer;
+    }
+
+    .ant-input-affix-wrapper .ant-input:not(:last-child) {
+      padding: 4px 30px 4px 34px;
+    }
+
+    .ant-form-item {
+      margin-bottom: 20px;
+    }
+
+    .ant-tabs .ant-tabs-bar {
+      margin-bottom: 24px;
+      text-align   : center;
+      border-bottom: 0;
+    }
+
+    .ant-tabs-tab {
+      font-size  : 16px;
+      line-height: 24px;
+    }
+
+    .ant-input-affix-wrapper .ant-input:not(:first-child) {
+      padding-left: 34px;
+    }
+
+    .icon {
+      margin-left   : 16px;
+      color         : rgba(0, 0, 0, 0.2);
+      font-size     : 24px;
+      vertical-align: middle;
+      cursor        : pointer;
+      transition    : color 0.3s;
+
+      &:hover {
+        color: @primary-color;
+      }
+    }
+
+    .other {
+      margin-top : 24px;
+      line-height: 22px;
+      text-align : left;
+
+      nz-tooltip {
+        vertical-align: middle;
+      }
+
+      .register {
+        float: right;
+      }
+    }
+  }
+}
+
+.wrap {
+  width        : 800px;
+  height       : 450px;
+  position     : absolute;
+  left         : 50%;
+  top          : 50%;
+  margin       : -225px 0 0 -400px;
+  background   : #fff;
+  box-shadow   : 0 0 8px #666;
+  border-radius: 10px;
+  z-index      : 9;
+}
+
+.bg {
+  width     : 100%;
+  overflow  : hidden;
+  position  : absolute;
+  left      : 0;
+  top       : 0;
+  background: url('../../../../assets/bg.png') no-repeat center center;
+}
+
+.left {
+  width        : 350px;
+  height       : 450px;
+  float        : left;
+  background   : url('../../../../assets/login.png') no-repeat center center;
+  border-radius: 10px 0 0 10px;
+}
+
+.right {
+  width        : 300px;
+  float        : right;
+  margin       : 60px 80px 0 0;
+  border-radius: 0 10px 10px 0;
+}

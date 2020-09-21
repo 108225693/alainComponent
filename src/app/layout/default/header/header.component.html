@@ -1,0 +1,89 @@
+<div class="alain-default__header-logo">
+  <a [routerLink]="['/']" class="alain-default__header-logo-link">
+    <img class="alain-default__header-logo-expanded" src="./assets/logo-full.png" style="max-height:40px;" />
+    <img class="alain-default__header-logo-collapsed" src="./assets/logo.png" style="max-height:30px;" />
+  </a>
+</div>
+<div class="alain-default__nav-wrap">
+  <ul class="alain-default__nav">
+    <!-- Menu -->
+    <li>
+      <div class="alain-default__nav-item" (click)="toggleCollapsedSidebar()">
+        <i nz-icon nzType="menu-{{ collapsed ? 'unfold' : 'fold' }}"></i>
+      </div>
+    </li>
+    <!-- Github Page -->
+    <!-- <li>
+      <a class="alain-default__nav-item" href="//github.com/ng-alain/ng-alain" target="_blank">
+        <i nz-icon nzType="github"></i>
+      </a>
+    </li> -->
+    <!-- Lock Page -->
+    <!-- <li class="hidden-mobile">
+      <div class="alain-default__nav-item" routerLink="/passport/lock">
+        <i nz-icon nzType="lock"></i>
+      </div>
+    </li> -->
+    <!-- Search Button -->
+    <!-- <li class="hidden-pc" (click)="searchToggleChange()">
+      <div class="alain-default__nav-item">
+        <i nz-icon nzType="search"></i>
+      </div>
+    </li> -->
+  </ul>
+  <!-- <header-search class="alain-default__search" [toggleChange]="searchToggleStatus"></header-search> -->
+  <ul class="alain-default__nav">
+    <!-- Notify -->
+    <!-- <li>
+      <header-notify></header-notify>
+    </li> -->
+    <!-- Task -->
+    <!-- <li class="hidden-mobile">
+      <header-task></header-task>
+    </li> -->
+    <!-- App Icons -->
+    <!-- <li class="hidden-mobile">
+      <header-icon></header-icon>
+    </li> -->
+    <!-- Settings -->
+    <li class="top-nav">
+      <a>生产组织</a>
+      <a nz-dropdown [nzDropdownMenu]="aqjk">
+        安全监控
+        <i nz-icon nzType="down"></i>
+      </a>
+      <nz-dropdown-menu #aqjk="nzDropdownMenu">
+        <ul nz-menu>
+          <li nz-menu-item>三防保障</li>
+          <li nz-menu-item>安全管理</li>
+        </ul>
+      </nz-dropdown-menu>
+      <a nz-dropdown [nzDropdownMenu]="jzfx">
+        集中分析
+        <i nz-icon nzType="down"></i>
+      </a>
+      <nz-dropdown-menu #jzfx="nzDropdownMenu">
+        <ul nz-menu>
+          <li nz-submenu nzTitle="数据分析">
+            <ul>
+              <li nz-menu-item>综合分析</li>
+            </ul>
+          </li>
+          <li nz-submenu nzTitle="集中监测">
+            <ul>
+              <li nz-menu-item>安全调度终端</li>
+              <li nz-menu-item>生产调度终端</li>
+              <li nz-menu-item>其他终端</li>
+            </ul>
+          </li>
+        </ul>
+      </nz-dropdown-menu>
+      <nz-badge [nzCount]="138" [nzOverflowCount]="99">
+        <a>应急处置</a>
+      </nz-badge>
+    </li>
+    <li class="hidden-mobile">
+      <header-user></header-user>
+    </li>
+  </ul>
+</div>

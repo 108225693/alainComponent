@@ -1,0 +1,33 @@
+<div class="save">
+    <button nz-button nzType="primary" (click)="save()"><i nz-icon nzType="save"></i>提交</button>
+</div>
+<div nz-row>
+    <div nz-col nzSpan="8">
+        <div class="wrap br" [ngStyle]="fullHeight">
+            <nz-table #userTable nzBordered [nzShowPagination]="false" [nzData]="roleList">
+                <thead>
+                    <tr>
+                        <th nzWidth="50px"></th>
+                        <th>角色名称</th>
+                        <th>备注</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of userTable.data;index as i">
+                        <td nzShowCheckbox [(nzChecked)]="data.checked" (nzCheckedChange)="roleChecked(data,i)">
+                        <td>{{ data.name }}</td>
+                        <td>{{ data.remarks }}</td>
+                    </tr>
+                </tbody>
+            </nz-table>
+        </div>
+    </div>
+    <div nz-col nzSpan="16">
+        <div class="wrap" [ngStyle]="fullHeight">
+            <nz-alert *ngIf="!menuStatus" nzType="info" nzMessage="请先选择角色" nzShowIcon></nz-alert>
+            <nz-tree *ngIf="menuStatus" #nzTreeComponent [nzData]="menuNodes" nzCheckable nzMultiple nzShowLine
+                nzExpandAll="true" [nzCheckedKeys]="defaultExpandedKeys" (nzCheckBoxChange)="menuTreeClick($event)">
+            </nz-tree>
+        </div>
+    </div>
+</div>

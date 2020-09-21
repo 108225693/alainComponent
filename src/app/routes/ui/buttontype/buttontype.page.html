@@ -1,0 +1,115 @@
+<div nz-row class="content-white">
+    <div>
+        <button nz-button nzType="default" nzSize="small" class="component-button-yellow"><i nz-icon
+                nzType="close-circle"></i>撤销</button>
+        <button nz-button nzType="default" class="component-button-yellow"><i nz-icon
+                nzType="close-circle"></i>撤销</button>
+        <button nz-button nzType="default" nzSize="large" class="component-button-yellow"><i nz-icon
+                nzType="close-circle"></i>撤销</button>
+        <button nz-button nzType="default" nzSize="small" class="component-button-yellow"><i nz-icon
+                nzType="setting"></i>设置</button>
+        <button nz-button nzType="default" class="component-button-yellow"><i nz-icon nzType="setting"></i>设置</button>
+        <button nz-button nzType="default" nzSize="large" class="component-button-yellow"><i nz-icon
+                nzType="setting"></i>设置</button>
+        <button nz-button nzType="default" nzSize="small" class="component-button-yellow"><i nz-icon
+                nzType="paper-clip"></i>附件</button>
+        <button nz-button nzType="default" class="component-button-yellow"><i nz-icon
+                nzType="paper-clip"></i>附件</button>
+        <button nz-button nzType="default" nzSize="large" class="component-button-yellow"><i nz-icon
+                nzType="paper-clip"></i>附件</button>
+    </div>
+    <div style="padding-top:20px;">
+        <button nz-button nzType="default" class="component-button-blue"><i nz-icon nzType="save"></i>保存</button>
+        <button nz-button nzType="default" class="component-button-blue"><i nz-icon nzType="plus-circle"></i>新编</button>
+        <button nz-button nzType="default" class="component-button-blue"><i nz-icon nzType="plus-circle"></i>题报</button>
+        <button nz-button nzType="default" class="component-button-blue"><i nz-icon nzType="form"></i>给号</button>
+        <button nz-button nzType="default" class="component-button-blue"><i nz-icon nzType="edit"></i>编辑</button>
+        <button nz-button nzType="default" class="component-button-blue"><i nz-icon
+                nzType="unordered-list"></i>明细</button>
+        <button nz-button nzType="default" class="component-button-blue"><i nz-icon
+                nzType="vertical-align-bottom"></i>导入</button>
+        <button nz-button nzType="default" class="component-button-blue"><i nz-icon nzType="play-square"></i>开始</button>
+        <button nz-button nzType="default" class="component-button-blue"><i nz-icon nzType="zoom-in"></i>放大</button>
+        <button nz-button nzType="default" class="component-button-blue"><i nz-icon nzType="zoom-out"></i>缩小</button>
+        <button nz-button nzType="default" class="component-button-blue"><i nz-icon nzType="star"></i>发布</button>
+        <button nz-button nzType="default" class="component-button-blue"><i nz-icon nzType="project"></i>计划优先</button>
+        <button nz-button nzType="default" class="component-button-blue"><i nz-icon
+                nzType="ordered-list"></i>默认排序</button>
+    </div>
+    <div style="padding-top:20px;">
+        <button nz-button nzType="default" class="component-button-green"><i nz-icon
+                nzType="check-circle"></i>批准</button>
+        <button nz-button nzType="default" class="component-button-green"><i nz-icon nzType="form"></i>签收</button>
+        <button nz-button nzType="default" class="component-button-green"><i nz-icon nzType="edit"></i>修改</button>
+        <button nz-button nzType="default" class="component-button-green"><i nz-icon nzType="read"></i>预览</button>
+        <button nz-button nzType="default" class="component-button-green"><i nz-icon nzType="block"></i>关联</button>
+        <button nz-button nzType="default" class="component-button-green"><i nz-icon
+                nzType="check-circle"></i>提交</button>
+        <button nz-button nzType="default" class="component-button-green"><i nz-icon nzType="printer"></i>打印</button>
+        <button nz-button nzType="default" class="component-button-green"><i nz-icon nzType="alert"></i>报警处理</button>
+        <button nz-button nzType="default" class="component-button-green"><i nz-icon nzType="upload"></i>导出周报</button>
+        <button nz-button nzType="default" class="component-button-green"><i nz-icon nzType="edit"></i>修改延迟</button>
+    </div>
+    <div style="padding-top:20px;">
+        <button nz-button nzType="default" class="component-button-red"><i nz-icon nzType="rollback"></i>驳回</button>
+        <button nz-button nzType="default" class="component-button-red"><i nz-icon nzType="delete"></i>删除</button>
+        <button nz-button nzType="default" class="component-button-red"><i nz-icon nzType="pause"></i>暂停</button>
+        <button nz-button nzType="default" class="component-button-red"><i nz-icon
+                nzType="question-circle"></i>帮助</button>
+        <button nz-button nzType="default" class="component-button-red"><i nz-icon nzType="close-circle"></i>关闭</button>
+    </div>
+    <div style="padding-top:20px;">
+        <button nz-button nzType="default" class="component-button-black"><i nz-icon nzType="delete"></i>清除</button>
+        <button nz-button nzType="default" class="component-button-black"><i nz-icon
+                nzType="loading-3-quarters"></i>重置</button>
+        <button nz-button nzType="default" class="component-button-black"><i nz-icon nzType="appstore"></i>分类</button>
+        <button nz-button nzType="default" class="component-button-black"><i nz-icon nzType="block"></i>纳入计划</button>
+    </div>
+    <div style="padding-top:20px;">
+        <nz-button-group>
+            <button nz-button nzType="primary">全部显示</button>
+            <button nz-button nz-dropdown [nzDropdownMenu]="menu">分类显示<i nz-icon nzType="down"></i></button>
+            <nz-dropdown-menu #menu="nzDropdownMenu">
+                <ul nz-menu>
+                    <li nz-menu-item>一级菜单1</li>
+                    <li nz-menu-item>一级菜单2</li>
+                    <li nz-submenu nzTitle="一级菜单1">
+                        <ul>
+                            <li nz-menu-item>二级菜单1</li>
+                            <li nz-menu-item>二级菜单2</li>
+                        </ul>
+                    </li>
+                    <li nz-submenu nzDisabled nzTitle="菜单禁用">
+                        <ul>
+                            <li nz-menu-item>二级菜单3</li>
+                            <li nz-menu-item>二级菜单4</li>
+                        </ul>
+                    </li>
+                </ul>
+            </nz-dropdown-menu>
+        </nz-button-group>
+        &nbsp;&nbsp;&nbsp;
+        <nz-button-group>
+            <button nz-button nzType="default"><i nz-icon nzType="left"></i>上一步</button>
+            <button nz-button nzType="default">下一步<i nz-icon nzType="right"></i></button>
+        </nz-button-group>
+        &nbsp;&nbsp;&nbsp;
+        <button nz-button nzType="dashed">虚线边框</button>
+        <a nz-button nzType="link">纯链接</a>
+    </div>
+    <div style="padding-top:20px;">
+        <nz-button-group>
+            <button nz-button nzType="primary"><i nz-icon nzType="pie-chart"></i>统计</button>
+            <button nz-button nzType="primary"><i nz-icon nzType="plus-circle"></i>新增</button>
+            <button nz-button nzType="primary"><i nz-icon nzType="save"></i>保存</button>
+            <button nz-button nzType="primary"><i nz-icon nzType="backward"></i>返回</button>
+            <button nz-button nzType="primary"><i nz-icon nzType="read"></i>目录</button>
+            <button nz-button nzType="primary"><i nz-icon nzType="search"></i>查询</button>
+        </nz-button-group>
+    </div>
+    <div style="padding-top:20px;">
+        <button nz-button nzType="primary" disabled>不可点击的按钮</button>
+        <button nz-button nzType="primary" nzLoading><i nz-icon nzType="poweroff"></i>加载中</button>
+        <button nz-button nzLoading nzShape="circle"></button>
+    </div>
+</div>

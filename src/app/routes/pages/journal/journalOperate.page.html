@@ -1,0 +1,93 @@
+<div class="content-white">
+    <div *ngIf="permission && forbidden">
+        <nz-alert nzType="warning" nzMessage="没有权限" nzDescription="此账号无权查看当前页面数据，请联系管理员或切换账号" nzShowIcon></nz-alert>
+    </div>
+    <div *ngIf="permission && !forbidden">
+        <div>
+            访问IP：<input type="text" nz-input [(ngModel)]="condition.requestIp" style="width:160px" />&nbsp;&nbsp;&nbsp;
+            模块：<input type="text" nz-input [(ngModel)]="condition.module" style="width:160px" />&nbsp;&nbsp;&nbsp;
+            访问名：<input type="text" nz-input [(ngModel)]="condition.userName" style="width:160px" />&nbsp;&nbsp;&nbsp;
+            开始时间：<nz-date-picker [(ngModel)]="condition.startTime"></nz-date-picker>&nbsp;&nbsp;&nbsp;
+            结束时间：<nz-date-picker [(ngModel)]="condition.finishTime"></nz-date-picker>&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;
+            <button nz-button nzType="primary" (click)="search()"><i nz-icon nzType="search"></i>查询</button>
+        </div>
+        <div style="padding:15px 0;">
+            <button nz-button nzType="default" (click)="delModalShow()" class="button-red"><i nz-icon
+                    nzType="delete"></i>删除</button>
+        </div>
+        <div class="journal">
+            <nz-table #rowSelectionTable nzBordered [nzScroll]="lockHeadScroll" [nzLoadingDelay]="1000"
+                [nzShowPagination]="false" [nzFrontPagination]="false" [nzPageSize]="pageValue" [nzData]="listOfAllData"
+                (nzCurrentPageDataChange)="currentPageDataChange($event)" (nzPageIndexChange)="refreshStatus()"
+                (nzPageSizeChange)="refreshStatus()">
+                <thead>
+                    <tr>
+                        <th nzWidth="50px" nzShowCheckbox [(nzChecked)]="allChecked" [nzIndeterminate]="indeterminate"
+                            (nzCheckedChange)="checkAll($event)"></th>
+                        <th nzWidth="6%">开始时间</th>
+                        <th nzWidth="5%">访问IP</th>
+                        <th nzWidth="2%">类型</th>
+                        <th nzWidth="5%">访问名</th>
+                        <th nzWidth="5%">模块</th>
+                        <th nzWidth="5%">描述</th>
+                        <!-- <th nzWidth="5%">访问方法</th> -->
+                        <th nzWidth="8%">访问地址</th>
+                        <th nzWidth="8%">参数</th>
+                        <th nzWidth="8%">浏览器</th>
+                        <!-- <th nzWidth="6%">结束时间</th> -->
+                        <th>异常详情</th>
+                        <th nzWidth="15%">异常描述</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of rowSelectionTable.data;index as i">
+                        <td nzShowCheckbox [(nzChecked)]="data.checked" (nzCheckedChange)="refreshStatus()">
+                        </td>
+                        <td>{{ data.startTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                        <td>{{ data.requestIp }}</td>
+                        <td>
+                            <span *ngIf="data.type == 1">正常</span>
+                            <span *ngIf="data.type == 2">异常</span>
+                        </td>
+                        <td>{{ data.userName }}</td>
+                        <td>{{ data.module }}</td>
+                        <td>{{ data.description }}</td>
+                        <!-- <td>{{ data.actionMethod }}</td> -->
+                        <td>{{ data.actionUrl }}</td>
+                        <td><textarea nz-input [(ngModel)]="data.params"
+                                [nzAutosize]="{ minRows: 1, maxRows: 10 }"></textarea></td>
+                        <td><textarea nz-input [(ngModel)]="data.ua"
+                                [nzAutosize]="{ minRows: 1, maxRows: 10 }"></textarea>
+                        </td>
+                        <!-- <td>{{ data.finishTime | date:'yyyy-MM-dd HH:mm:ss'}}</td> -->
+                        <td><textarea nz-input [(ngModel)]="data.exDetail"
+                                [nzAutosize]="{ minRows: 1, maxRows: 10 }"></textarea></td>
+                        <td>
+                            <textarea nz-input [(ngModel)]="data.exDesc"
+                                [nzAutosize]="{ minRows: 1, maxRows: 10 }"></textarea></td>
+                    </tr>
+                </tbody>
+            </nz-table>
+        </div>
+    </div>
+    <div class="pageWrap">
+        <div class="pageSelect">
+            每页
+            <nz-select [(ngModel)]="selectedValue" (ngModelChange)="yearselectedChange()">
+                <nz-option nzValue="10" nzLabel="10"></nz-option>
+                <nz-option nzValue="50" nzLabel="50"></nz-option>
+                <nz-option nzValue="100" nzLabel="100"></nz-option>
+                <nz-option nzValue="200" nzLabel="200"></nz-option>
+            </nz-select> 条&nbsp;&nbsp;&nbsp;总共<span class="pageTotal">{{pageTotal}}</span>条
+        </div>
+        <div class="pageInation">
+            <nz-pagination [nzPageSize]="selectedValue" [nzPageIndex]="pageIndexTable" [nzTotal]="rowTotalTable"
+                (nzPageIndexChange)="rowChangeTable1($event)"></nz-pagination>
+        </div>
+    </div>
+</div>
+
+<app-delmodal *ngIf="delModalVisible" [apiUrl]="'/system/sysLog/delete'" [apiType]="'array'" [responseData]="tempData"
+    (closeModal)="delModalHide()" (reloadData)="loadList()">
+</app-delmodal>
